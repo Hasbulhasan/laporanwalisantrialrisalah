@@ -8,7 +8,6 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f7f4; margin: 0; padding: 20px; }
         .container { max-width: 500px; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: auto; }
         
-        /* Gaya untuk Logo */
         .logo-container { text-align: center; margin-bottom: 15px; }
         .logo-container img { max-width: 100px; height: auto; }
 
@@ -16,13 +15,22 @@
         .sub-title { text-align: center; color: #666; margin-bottom: 25px; font-size: 0.9em; }
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
-        input[type="text"], select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+        
+        input[type="text"], select, textarea { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; font-family: inherit;
+        }
+        
+        textarea { resize: vertical; min-height: 80px; }
+
         .checkbox-group { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
         .checkbox-item { margin-bottom: 12px; display: flex; align-items: center; cursor: pointer; font-size: 14px; }
         .checkbox-item input { margin-right: 12px; width: 18px; height: 18px; cursor: pointer; }
+        
         button { width: 100%; padding: 14px; background-color: #2d5a27; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; margin-top: 10px; }
         button:hover { background-color: #1e3d1a; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
+        
+        .footer-note { text-align: center; color: #888; font-size: 0.85em; margin-top: 10px; font-style: italic; }
         #statusMessage { margin-top: 15px; text-align: center; font-weight: bold; padding: 10px; border-radius: 5px; display: none; }
     </style>
 </head>
@@ -46,7 +54,6 @@
             <label>Kelas:</label>
             <select name="kelas" required>
                 <option value="">-- Pilih Kelas --</option>
-                
                 <optgroup label="1 Wustha">
                     <option value="1A Wustha">1A Wustha</option>
                     <option value="1B Wustha">1B Wustha</option>
@@ -55,7 +62,6 @@
                     <option value="1E Wustha">1E Wustha</option>
                     <option value="1F Wustha">1F Wustha</option>
                 </optgroup>
-
                 <optgroup label="2 Wustha">
                     <option value="2A Wustha">2A Wustha</option>
                     <option value="2B Wustha">2B Wustha</option>
@@ -64,7 +70,6 @@
                     <option value="2E Wustha">2E Wustha</option>
                     <option value="2F Wustha">2F Wustha</option>
                 </optgroup>
-
                 <optgroup label="3 Wustha">
                     <option value="3A Wustha">3A Wustha</option>
                     <option value="3B Wustha">3B Wustha</option>
@@ -72,7 +77,6 @@
                     <option value="3D Wustha">3D Wustha</option>
                     <option value="3E Wustha">3E Wustha</option>
                 </optgroup>
-
                 <optgroup label="MAPK">
                     <option value="1A MAPK">1A MAPK</option>
                     <option value="1B MAPK">1B MAPK</option>
@@ -80,7 +84,6 @@
                     <option value="2B MAPK">2B MAPK</option>
                     <option value="3 MAPK">3 MAPK</option>
                 </optgroup>
-
                 <optgroup label="PDF">
                     <option value="1 PDF">1 PDF</option>
                     <option value="2 PDF">2 PDF</option>
@@ -102,15 +105,20 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label>Catatan Orang Tua (Opsional):</label>
+            <textarea name="catatan" placeholder="Ceritakan jika ada perilaku santri yang kurang baik atau perlu diperhatikan selama di rumah..."></textarea>
+        </div>
+
         <button type="submit" id="submitBtn">Kirim Laporan</button>
+        <p class="footer-note">* Harap mengisi sesuai kenyataan</p>
     </form>
     <div id="statusMessage"></div>
 </div>
 
 <script>
     const form = document.getElementById('ramadhanForm');
-    // URL Web App Google Script Anda
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyS9dTAzvP38GRa2YzHKOg4ziXsvkFyIDG7k0nuMLZgGsE2OyX8-EWoFmQuiH0ZyniiQA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx7olgsEI3FOAYZ00jeSg-8HOVPITT0ulaNj2UpQGfROnE17hU5LT76JhvWxGGl6zmktw/exec';
 
     form.addEventListener('submit', e => {
         e.preventDefault();
